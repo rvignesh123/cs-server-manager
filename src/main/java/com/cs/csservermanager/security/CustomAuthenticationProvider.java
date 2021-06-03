@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import com.cs.csservermanager.properties.ApplicationProps;
 
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -21,7 +22,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     if (checkValidDetails(name, password)) {
       return new UsernamePasswordAuthenticationToken(name, password, new ArrayList<>());
     } else {
-      return null;
+      throw new AuthenticationCredentialsNotFoundException("Invalid Username or password.");
     }
   }
 
