@@ -11,16 +11,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.cs.csservermanager.properties.ApplicationProps;
+
 public class ServerProcess implements Runnable {
 
   public List<String> commands;
   public String output = "";
-  public int exitStatus = -1;
+  public boolean isRunning = false;
 
   private Process process = null;
 
   public ServerProcess() {
-    commands = Arrays.asList("cmd.exe");
+    String[] commandArray = ApplicationProps.APPLICATION_PROP.getProperty("gameCommand").split(" ");
+    commands = Arrays.asList(commandArray);
   }
 
   /**
@@ -47,6 +50,7 @@ public class ServerProcess implements Runnable {
     }
     processBuilder.redirectErrorStream(true);
     process = processBuilder.start();
+    isRunning = true;
     BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()));
     String line = "";
     StringBuilder builder = new StringBuilder();
@@ -55,7 +59,7 @@ public class ServerProcess implements Runnable {
       if (line == null) {
         break;
       }
-      builder.append(line);
+      builder.append(line + "\n\r");
       output = builder.toString();
       if (toLog) {
         System.out.println(line);
@@ -84,13 +88,19 @@ public class ServerProcess implements Runnable {
   @Override
   public void run() {
     try {
-      exitStatus = runProcess(true, null, commands, null);
+      File gameDir = new File(ApplicationProps.APPLICATION_PROP.getProperty("gameDir"));
+      runProcess(true, gameDir, commands, null);
+      isRunning = false;
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     } catch (InterruptedException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
+    }
+  }
+
+  public void stopProcess() {
+    if (process != null) {
+      process.destroy();
     }
   }
 }

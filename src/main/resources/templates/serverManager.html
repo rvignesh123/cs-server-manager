@@ -1,43 +1,181 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="/docs/4.1/assets/img/favicons/favicon.ico" />
 
-<title>Server Management portal</title>
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/xterm.min.js"></script>
+    <title>CS Server Management Portal</title>
 
-<script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.3.0/lib/xterm-addon-fit.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/xterm.min.css" />
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<!-- Custom styles for this template -->
-<script src="js/serverManager.js"> </script>
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/"
+    />
 
+    <!-- Bootstrap core CSS -->
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
 
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/xterm.min.css"
+    />
 
-<body>
-<div class="container">
-      <input name="command" id="command"></input>
-      <button onclick="startServerAction()"> Start Server</button>
-      <button onclick="getServerLogs()"> Fetch Logs</button>
-      <button onclick="writeCommand()"> Send command</button>
-      <p id="log">Testing This works</p>
-      <div>
-        <div id="terminal"></div>
+    <!-- Custom styles for this template -->
+    <link href="css/server-manager.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <div class="navbar-brand col-sm-3 col-md-2 mr-0">
+        <div class="row">
+          <div>CS Server Manager</div>
+          <div class="col-md-3" id="server-status">
+            <i class="fa fa-bomb"></i>
+          </div>
+        </div>
       </div>
-</div>
 
-</body>
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="#">Sign out</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">
+                  <span data-feather="home"></span>
+                  Dashboard <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Maps
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="shopping-cart"></span>
+                  Players control
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          <div
+            class="
+              d-flex
+              justify-content-between
+              flex-wrap flex-md-nowrap
+              align-items-center
+              pt-3
+              pb-2
+              mb-3
+              border-bottom
+            "
+          >
+            <h1 class="h2">Management Portal</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="mr-2">
+                <button
+                  class="btn btn-sm btn-outline-primary"
+                  id="start-button"
+                  data-toggle="tooltip"
+                  title="Start server"
+                  onclick="confirmStartServer()"
+                >
+                  <i class="fa fa-play"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-danger"
+                  id="stop-button"
+                  data-toggle="tooltip"
+                  onclick="confirmStopServer()"
+                  title="Stop server"
+                >
+                  <i class="fa fa-stop"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-warning"
+                  id="refresh-button"
+                  data-toggle="tooltip"
+                  title="Refresh logs"
+                  onclick="refreshLogs()"
+                >
+                  <i class="fa fa-refresh"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div id="terminal"></div>
+          </div>
+          <div class="command">
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="command-input"
+                placeholder="Execute a command here"
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-outline-primary"
+                  type="button"
+                  id="send-command-button"
+                  onclick="runCommand()"
+                >
+                  <i class="fa fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/xterm.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="js/serverManager.js"></script>
+  </body>
 </html>
