@@ -2,7 +2,6 @@ package com.cs.csservermanager.manage;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -27,6 +26,15 @@ public class ServerManager {
     HashMap<String, String> resultMap = new HashMap<>();
     Thread gameThread = new Thread(gameProcess);
     gameThread.start();
+    resultMap.put("result", "success");
+    return resultMap;
+  }
+
+  @PostMapping("/stopServer")
+  @ResponseBody
+  public HashMap<String, String> stopServer() {
+    HashMap<String, String> resultMap = new HashMap<>();
+    gameProcess.stopProcess();
     resultMap.put("result", "success");
     return resultMap;
   }
