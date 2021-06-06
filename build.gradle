@@ -14,6 +14,12 @@ repositories {
 }
 
 node {
+    //Remove this if you already npm and node in your local
+    version = '12.18.3'
+    download = true
+    workDir = file("${project.projectDir}/src/main/react-js-frontend/nodejs")
+    npmWorkDir = file("${project.projectDir}/src/main/react-js-frontend/npm")
+    //Don't remove next line
     nodeModulesDir = file("${project.projectDir}/src/main/react-js-frontend")
 }
 
