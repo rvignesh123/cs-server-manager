@@ -1,10 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Welcome from "./components/Welcome";
 import NavigationBar from "./components/NavigationBar";
 import Manager from "./components/Manager/Manager";
 import "./App.css";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
 
 function App() {
   const heading = "Welcome to CS Gaming server";
@@ -15,20 +22,14 @@ function App() {
     <Router>
       <NavigationBar />
       <Container fluid>
-        <Row>
-          <Col className={"margin-top"}>
-            <Switch>
-              <Route
-                path="/"
-                exact
-                component={() => (
-                  <Welcome heading={heading} quote={quote} footer={footer} />
-                )}
-              />
-              <Route path="/manager" exact component={Manager} />
-            </Switch>
-          </Col>
-        </Row>
+        <Switch>
+          <Route exact path="/">
+            <Welcome heading={heading} quote={quote} footer={footer} />
+          </Route>
+          <Route path="/manager">
+            <Manager />
+          </Route>
+        </Switch>
       </Container>
     </Router>
   );

@@ -2,15 +2,15 @@ import React from "react";
 
 import { Jumbotron, Row, Col } from "react-bootstrap";
 
-export default function Welcome(props) {
+export default function Console(props) {
   return (
     <Row>
       <Col lg={12} className={"margin-top"}>
         <Jumbotron className="bg-dark text-white">
-          <h1>{props.heading}</h1>
+          <h1>Manager Console</h1>
           <blockquote className="blockquote mb-0">
-            <p>{props.quote}</p>
-            <footer className="blockquote-footer">{props.footer}</footer>
+            <p>Build in progress</p>
+            <footer className="blockquote-footer">Test footer</footer>
           </blockquote>
         </Jumbotron>
       </Col>
