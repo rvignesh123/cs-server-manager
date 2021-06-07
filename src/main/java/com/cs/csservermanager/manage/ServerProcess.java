@@ -20,6 +20,7 @@ public class ServerProcess implements Runnable {
   public boolean isRunning = false;
 
   private Process process = null;
+  private ProcessHandle processHandle = null;
 
   public ServerProcess() {
     String[] commandArray = ApplicationProps.APPLICATION_PROP.getProperty("gameCommand").split(" ");
@@ -50,6 +51,7 @@ public class ServerProcess implements Runnable {
     }
     processBuilder.redirectErrorStream(true);
     process = processBuilder.start();
+    processHandle = process.toHandle();
     isRunning = true;
     BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()));
     String line = "";
@@ -99,8 +101,9 @@ public class ServerProcess implements Runnable {
   }
 
   public void stopProcess() {
-    if (process != null) {
-      process.destroy();
+    if (processHandle != null) {
+      processHandle.destroy();
+      output = "";
     }
   }
 }
