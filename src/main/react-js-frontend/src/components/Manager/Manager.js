@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col, Jumbotron } from "react-bootstrap";
 import { withRouter } from "react-router";
 import ManagerSideBar from "./ManagerSideBar";
+import Console from "./Console";
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,17 +16,20 @@ import Welcome from "../Welcome";
 export default function Manager() {
   let { path, url } = useRouteMatch();
   return (
-    <Row>
+    <Row className={"margin-top"}>
       <Col xs={2} id="sidebar-wrapper">
         <ManagerSideBar />
       </Col>
-      <Col xs={10} id="page-content-wrapper">
+      <Col id="page-content-wrapper">
         <Switch>
           <Route exact path={path}>
             <h3>Please select a topic.</h3>
           </Route>
-          <Route path={`${path}/:topicId`}>
-            <h3>Please sTest.</h3>
+          <Route path={`${path}/console`}>
+            <Console />
+          </Route>
+          <Route path={`${path}/rendering`}>
+            <h3>Rendering</h3>
           </Route>
         </Switch>
       </Col>

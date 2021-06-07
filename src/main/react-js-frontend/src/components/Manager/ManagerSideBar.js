@@ -26,21 +26,15 @@ export default function ManagerSideBar(props) {
     >
       <div className="sidebar-sticky"></div>
       <Nav>
-        <Link to={`${url}/rendering`}>
-          <FontAwesomeIcon icon={faSignInAlt} /> Login
+        <Link to={`${url}/console`}>
+          <FontAwesomeIcon icon={faSignInAlt} /> Console
         </Link>
       </Nav>
-      <Nav.Item>
-        <Nav.Link eventKey="link-1">Link</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="link-2">Link</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="disabled" disabled>
-          Disabled
-        </Nav.Link>
-      </Nav.Item>
+      <Nav>
+        <Link to={`${url}/maps`}>
+          <FontAwesomeIcon icon={faSignInAlt} /> Change Map
+        </Link>
+      </Nav>
     </Nav>
   );
 }
