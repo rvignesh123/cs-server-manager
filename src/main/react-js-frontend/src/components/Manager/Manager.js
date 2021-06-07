@@ -12,6 +12,7 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import Welcome from "../Welcome";
+import Maps from "./Maps";
 
 export default function Manager() {
   let { path, url } = useRouteMatch();
@@ -28,8 +29,8 @@ export default function Manager() {
           <Route path={`${path}/console`}>
             <Console />
           </Route>
-          <Route path={`${path}/rendering`}>
-            <h3>Rendering</h3>
+          <Route path={`${path}/maps`}>
+            <Maps />
           </Route>
         </Switch>
       </Col>
