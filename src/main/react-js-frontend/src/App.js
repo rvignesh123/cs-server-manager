@@ -3,6 +3,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Welcome from "./components/Welcome";
 import NavigationBar from "./components/NavigationBar";
+import Manager from "./components/Manager/Manager";
+import "./App.css";
 
 function App() {
   const heading = "Welcome to CS Gaming server";
@@ -12,9 +14,9 @@ function App() {
   return (
     <Router>
       <NavigationBar />
-      <Container>
+      <Container fluid>
         <Row>
-          <Col lg={12} className={"margin-top"}>
+          <Col className={"margin-top"}>
             <Switch>
               <Route
                 path="/"
@@ -23,6 +25,7 @@ function App() {
                   <Welcome heading={heading} quote={quote} footer={footer} />
                 )}
               />
+              <Route path="/manager" exact component={Manager} />
             </Switch>
           </Col>
         </Row>
