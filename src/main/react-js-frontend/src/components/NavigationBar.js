@@ -26,11 +26,8 @@ class NavigationBar extends Component {
     const userLinks = (
       <>
         <Nav className="mr-auto">
-          <Link to={"add"} className="nav-link">
-            Add Book
-          </Link>
-          <Link to={"list"} className="nav-link">
-            Book List
+          <Link to={"manager"} className="nav-link">
+            Manager
           </Link>
           <Link to={"users"} className="nav-link">
             User List
@@ -53,9 +50,9 @@ class NavigationBar extends Component {
             height="25"
             alt="brand"
           />{" "}
-          Book Store
+          CS Server
         </Link>
-        {guestLinks}
+        {userLinks}
       </Navbar>
     );
   }
