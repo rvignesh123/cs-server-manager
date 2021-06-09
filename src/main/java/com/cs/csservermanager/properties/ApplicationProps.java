@@ -1,5 +1,6 @@
 package com.cs.csservermanager.properties;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,6 +40,10 @@ public class ApplicationProps {
 
   public static String getServerResourcePath() {
     return APPLICATION_PROP.getProperty("ServerResourceDir");
+  }
+
+  public static String getMapsFile() {
+    return appDir + File.separator + "maps.json";
   }
 
 }

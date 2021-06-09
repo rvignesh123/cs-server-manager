@@ -56,10 +56,14 @@ task npmInstall2(type: NpmTask) {
 }
 
 dependencies {
+  implementation 'com.google.code.gson:gson:2.8.6'
+  implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
   implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
   implementation 'org.springframework.boot:spring-boot-starter-security'
+  implementation group:'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
   implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.4.6'
+  implementation group: 'org.codehaus.jettison', name: 'jettison', version: '1.4.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
