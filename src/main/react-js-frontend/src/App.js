@@ -1,37 +1,39 @@
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col } from "react-bootstrap";
-import Welcome from "./components/Welcome";
-import NavigationBar from "./components/NavigationBar";
-import Manager from "./components/Manager/Manager";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import { AuthProvider } from "./Context";
+import Sidebar from "./Components/Sidebar";
+import Console from "./Pages/Manager/Console";
+import GameContextProvider from "./Context/GameContextProvider";
+import Home from "./Pages/Home";
+import Maps from "./Pages/Manager/Maps";
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-  useRouteMatch,
-} from "react-router-dom";
+
+const GameContext = React.createContext({});
 
 function App() {
   const heading = "Welcome to CS Gaming server";
   const quote = "Good friends, good game, Have fun.";
   const footer = "Vignesh Rv";
-
   return (
-    <Router>
-      <NavigationBar />
-      <Container fluid>
-        <Switch>
-          <Route exact path="/">
-            <Welcome heading={heading} quote={quote} footer={footer} />
-          </Route>
-          <Route path="/manager">
-            <Manager />
-          </Route>
-        </Switch>
-      </Container>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Sidebar />
+        <Container fluid>
+          <Switch>
+            <Route exact path="/">
+              <Home heading={heading} quote={quote} footer={footer} />
+            </Route>
+            <GameContextProvider>
+              <Route path="/manager" exact component={Console} />
+              <Route path="/manager/console" exact component={Console} />
+              <Route path="/manager/maps" exact component={Maps} />
+            </GameContextProvider>
+          </Switch>
+        </Container>
+      </Router>
+    </AuthProvider>
   );
 }
 
