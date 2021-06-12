@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faUser, faLock, faUndo} from "@fortawesome/free-solid-svg-icons";
 
 function Login(props) {
-	const [user, setUser] = useState('');
+	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [error,setError] = useState(undefined);
 
@@ -18,7 +18,8 @@ function Login(props) {
 		e.preventDefault();
 
 		try {
-			let response = await loginUser(dispatch, { user, password });
+			let response = await loginUser(dispatch, { username, password });
+            console.log(response)
 			if (!response.user) return;
 			props.history.push('/dashboard');
 		} catch (error) {
@@ -41,7 +42,7 @@ function Login(props) {
                                         <InputGroup.Prepend>
                                             <InputGroup.Text><FontAwesomeIcon icon={faUser}/></InputGroup.Text>
                                         </InputGroup.Prepend>
-                                        <FormControl required autoComplete="off" type="text" name="user" value={user} onChange={(e) => setUser(e.target.value)}
+                                        <FormControl required autoComplete="off" type="text" name="user" value={username} onChange={(e) => setUsername(e.target.value)}
                                             className={"bg-dark text-white"} placeholder="Enter User name"/>
                                     </InputGroup>
                                 </Form.Group>
@@ -59,7 +60,7 @@ function Login(props) {
                             </Form.Row>
                         </Card.Body>
                         <Card.Footer style={{"text-align":"right"}}>
-                            <Button size="sm" type="button" variant="success" 
+                            <Button size="sm" type="button" variant="success" onClick={(e) => handleLogin(e)}
                                >
                                 <FontAwesomeIcon icon={faSignInAlt}/> Login
                             </Button>{' '}
