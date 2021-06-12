@@ -7,6 +7,8 @@ const Maps = () => {
   const { status } = useContext(GameContext);
   const [cardSelected, setCardSelected] = useState(false);
   const [maps, setMaps] = useState([]);
+  const [activeCard , setActiveCard] = useState();
+
 
   const fetchMaps = async (e) => {
     axios
@@ -21,22 +23,39 @@ const Maps = () => {
   };
 
   useEffect(() => {
-    console.log(status);
     fetchMaps();
   }, []);
 
-  const mapImages = (map) => {
+
+  const showErrorMessage = ()=>{
+    return <h1>Please turn on the server to see the maps</h1>;
+  }
+
+
+  React.useEffect(() => {
+    console.log(status);
+  },[status]);
+
+  const setCardActive=(cardNumber)=>{
+    setActiveCard(cardNumber);
+  }
+
+  const activateMap=(map)=>{
+    console.log(map);
+  }
+
+  const mapImages = (map,index) => {
     return (
       <>
-        <Col className="card-style">
-          <Card style={{ width: "18rem" }}>
+        <Col className="card-style" key={index}>
+          <Card style={{ width: "18rem" }} onClick={(e)=>setCardActive(index)}>
             <Card.Img
               variant="top"
-              src="http://localhost:8080/ServerResourceList/MapPreview/828_aztec.jpg"
+              src="http://localhost:8080/ServerResourceList/MapPreview/de_dust.png"
             />
             <Card.Body className="bg-dark">
               <Card.Title>{map.name}</Card.Title>
-              <Button variant="primary">Play now</Button>
+              {activeCard == index ? <Button variant="primary" onClick={(e)=>activateMap(map)}>Play now</Button> : ""}
             </Card.Body>
           </Card>
         </Col>
@@ -46,8 +65,8 @@ const Maps = () => {
 
   return (
     <Jumbotron className="bg-dark text-white margin-top">
-      <h1>Maps Loader</h1>
-      <Row>{maps.map((eachMap) => mapImages(eachMap))}</Row>
+      {status ? <><h1>Maps Loader</h1> <Row>{maps.map((eachMap,index) => mapImages(eachMap,index))}</Row> </>: showErrorMessage() }
+      
     </Jumbotron>
   );
 };

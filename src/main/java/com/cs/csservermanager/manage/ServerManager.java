@@ -4,13 +4,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping("/server")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ServerManager {
 
   static ServerProcess gameProcess = new ServerProcess();
@@ -20,23 +25,28 @@ public class ServerManager {
     return "serverManager";
   }
 
+  @GetMapping("/updateServer")
+  public Boolean updateServer(@RequestParam("status") Boolean status) {
+    return status ? startServer() : stopServer();
+  }
+
   @PostMapping("/startServer")
   @ResponseBody
-  public HashMap<String, String> startServer() {
+  public Boolean startServer() {
     HashMap<String, String> resultMap = new HashMap<>();
     Thread gameThread = new Thread(gameProcess);
     gameThread.start();
     resultMap.put("result", "success");
-    return resultMap;
+    return true;
   }
 
   @PostMapping("/stopServer")
   @ResponseBody
-  public HashMap<String, String> stopServer() {
+  public Boolean stopServer() {
     HashMap<String, String> resultMap = new HashMap<>();
     gameProcess.stopProcess();
     resultMap.put("result", "success");
-    return resultMap;
+    return false;
   }
 
   @PostMapping("/serverStatus")

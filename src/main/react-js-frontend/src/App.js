@@ -10,8 +10,6 @@ import Home from "./Pages/Home";
 import Maps from "./Pages/Manager/Maps";
 import "./App.css";
 
-const GameContext = React.createContext({});
-
 function App() {
   const heading = "Welcome to CS Gaming server";
   const quote = "Good friends, good game, Have fun.";
