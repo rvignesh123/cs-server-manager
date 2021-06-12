@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CsservermanagerApplication {
 
   public static void main(String[] args) {
-    String appDir = "/home/vignesh/CS_DIR";
+    String appDir = "D:/game project/settings";
     if (args.length > 0) {
       appDir = args[0];
     }

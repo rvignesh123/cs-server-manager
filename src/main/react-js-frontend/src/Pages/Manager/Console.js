@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
 
 import {
   Row,
@@ -21,12 +22,31 @@ import { GameContext } from "../../Context/GameContextProvider";
 export default function Console(props) {
   const fitAddon = new FitAddon();
   const xtermRef = React.useRef(null);
-  const { status } = useContext(GameContext);
+  const { status, setStatus , log , getServerStatus } = useContext(GameContext);
+
 
   React.useEffect(() => {
-    xtermRef.current.terminal.writeln("Hello, World!");
+    xtermRef.current.terminal.reset();
+    xtermRef.current.terminal.writeln(log);
     fitAddon.fit();
-  }, []);
+  }, [log]);
+
+  const updateServer=(checked)=>{
+    setStatus(checked);
+    axios
+    .get("http://localhost:8080/server/updateServer?status="+checked)
+    .then((response) => response.data)
+    .then((data) => {
+      setStatus(data);
+      getServerStatus();
+    })
+    .catch((error) => {
+      console.log(error);
+      setStatus(false);
+    });
+  }
+  
+
 
   return (
     <Row>
@@ -46,7 +66,7 @@ export default function Console(props) {
                 checked={status}
                 onstyle="success"
                 offstyle="outline-danger"
-                onChange={(checked) => {}}
+                onChange={(checked) => {updateServer(checked)}}
               />
             </Row>
 
