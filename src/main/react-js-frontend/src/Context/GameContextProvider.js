@@ -7,12 +7,12 @@ const GameContextProvider = (props) => {
 
 
 
-  useEffect(()=>{
-    getServerStatus();
-  },[]);
+/*useEffect(()=>{
+  getServerStatus();
+},[]);*/
 
 
-  
+
   /*var serverInfo = setInterval(() => {
     getServerStatus();
   }, 18000); */
@@ -23,6 +23,7 @@ const GameContextProvider = (props) => {
 
 
   const getServerStatus=()=>{
+    console.log("Status Server Call")
     axios
     .post("http://localhost:8080/server/serverStatus")
     .then((response) => response.data)
@@ -37,6 +38,19 @@ const GameContextProvider = (props) => {
     });
   }
 
+  const runCommand=(command)=>{
+    axios
+    .post("http://localhost:8080/server/writeCommand",{"command":command})
+    .then((response) => response.data)
+    .then((data) => {
+      
+    })
+    .catch((error) => {
+      console.log(error);
+      
+    });
+  };
+
 
   return (
     <GameContext.Provider
@@ -44,7 +58,8 @@ const GameContextProvider = (props) => {
         status: status,
         setStatus : setStatus,
         log : log,
-        getServerStatus : getServerStatus()
+        getServerStatus : getServerStatus,
+        runCommand: runCommand
       }}
     >
       {props.children}

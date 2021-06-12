@@ -4,7 +4,7 @@ import { Jumbotron, Row, Col, Image, Card, Button } from "react-bootstrap";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import axios from "axios";
 const Maps = () => {
-  const { status } = useContext(GameContext);
+  const { status,runCommand } = useContext(GameContext);
   const [cardSelected, setCardSelected] = useState(false);
   const [maps, setMaps] = useState([]);
   const [activeCard , setActiveCard] = useState();
@@ -41,7 +41,7 @@ const Maps = () => {
   }
 
   const activateMap=(map)=>{
-    console.log(map);
+    runCommand("changelevel "+map.name);
   }
 
   const mapImages = (map,index) => {

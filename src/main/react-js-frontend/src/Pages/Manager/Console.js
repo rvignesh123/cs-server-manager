@@ -22,7 +22,8 @@ import { GameContext } from "../../Context/GameContextProvider";
 export default function Console(props) {
   const fitAddon = new FitAddon();
   const xtermRef = React.useRef(null);
-  const { status, setStatus , log , getServerStatus } = useContext(GameContext);
+  const [ command, setCommand] = useState('');
+  const { status, setStatus , log , getServerStatus, runCommand } = useContext(GameContext);
 
 
   React.useEffect(() => {
@@ -31,6 +32,19 @@ export default function Console(props) {
     fitAddon.fit();
   }, [log]);
 
+  useEffect(() => {
+    getServerStatus();
+    const interval = setInterval(() => {
+      console.log("Triggered Timer" + status);
+      if(status){
+        console.log("Calling server method")
+        getServerStatus();
+      }
+    }, 5*1000);
+  
+    return () => clearInterval(interval);
+  }, [status]);
+
   const updateServer=(checked)=>{
     setStatus(checked);
     axios
@@ -38,7 +52,6 @@ export default function Console(props) {
     .then((response) => response.data)
     .then((data) => {
       setStatus(data);
-      getServerStatus();
     })
     .catch((error) => {
       console.log(error);
@@ -46,8 +59,6 @@ export default function Console(props) {
     });
   }
   
-
-
   return (
     <Row>
       <Col lg={12} className={"margin-top"}>
@@ -77,8 +88,10 @@ export default function Console(props) {
                 placeholder="Execute a command"
                 aria-label="Execute a command"
                 aria-describedby="basic-addon2"
+                value={command}
+								onChange={(e) => setCommand(e.target.value)}
               />
-              <Button variant="outline-secondary" id="button-addon2">
+              <Button variant="outline-secondary" id="button-addon2" onClick={()=>{runCommand(command)}}>
                 Run
               </Button>
             </InputGroup>
