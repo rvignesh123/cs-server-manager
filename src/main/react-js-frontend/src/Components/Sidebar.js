@@ -7,6 +7,8 @@ import { SidebarData } from "./SidebarData";
 import SubMenu from "./SubMenu";
 import { IconContext } from "react-icons/lib";
 import { Navbar } from "react-bootstrap";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faUserPlus, faSignInAlt, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 
 const Nav = styled.div`
   background: #343a40;
@@ -76,6 +78,9 @@ const Sidebar = () => {
           />{" "}
           CS Server
         </Link>
+        <Nav className="navbar-right">
+          <Link to={"login"} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Login</Link>
+        </Nav>
       </Navbar>
     </>
   );

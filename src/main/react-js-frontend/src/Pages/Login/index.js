@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 
 import { loginUser, useAuthState, useAuthDispatch } from '../../Context';
 import styles from './login.module.css';
+import {Row, Col, Card, Form, InputGroup, FormControl, Button, Alert} from 'react-bootstrap';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faSignInAlt, faUser, faLock, faUndo} from "@fortawesome/free-solid-svg-icons";
 
 function Login(props) {
-	const [email, setEmail] = useState('');
+	const [user, setUser] = useState('');
 	const [password, setPassword] = useState('');
+	const [error,setError] = useState(undefined);
 
 	const dispatch = useAuthDispatch();
 	const { loading, errorMessage } = useAuthState();
@@ -14,7 +18,7 @@ function Login(props) {
 		e.preventDefault();
 
 		try {
-			let response = await loginUser(dispatch, { email, password });
+			let response = await loginUser(dispatch, { user, password });
 			if (!response.user) return;
 			props.history.push('/dashboard');
 		} catch (error) {
@@ -23,39 +27,46 @@ function Login(props) {
 	};
 
 	return (
-		<div className={styles.container}>
-			<div className={{ width: 200 }}>
-				<h1>Login Page</h1>
-				{errorMessage ? <p className={styles.error}>{errorMessage}</p> : null}
-				<form>
-					<div className={styles.loginForm}>
-						<div className={styles.loginFormItem}>
-							<label htmlFor='email'>Username</label>
-							<input
-								type='text'
-								id='email'
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-								disabled={loading}
-							/>
-						</div>
-						<div className={styles.loginFormItem}>
-							<label htmlFor='password'>Password</label>
-							<input
-								type='password'
-								id='password'
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-								disabled={loading}
-							/>
-						</div>
-					</div>
-					<button onClick={handleLogin} disabled={loading}>
-						login
-					</button>
-				</form>
-			</div>
-		</div>
+		<Row className="justify-content-md-center margin-top">
+                <Col xs={5}>
+                    {error && <Alert variant="danger">{error}</Alert>}
+                    <Card className={"border border-dark bg-dark text-white"}>
+                        <Card.Header>
+                            <FontAwesomeIcon icon={faSignInAlt}/> Login
+                        </Card.Header>
+                        <Card.Body>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <InputGroup>
+                                        <InputGroup.Prepend>
+                                            <InputGroup.Text><FontAwesomeIcon icon={faUser}/></InputGroup.Text>
+                                        </InputGroup.Prepend>
+                                        <FormControl required autoComplete="off" type="text" name="user" value={user} onChange={(e) => setUser(e.target.value)}
+                                            className={"bg-dark text-white"} placeholder="Enter User name"/>
+                                    </InputGroup>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <InputGroup>
+                                        <InputGroup.Prepend>
+                                            <InputGroup.Text><FontAwesomeIcon icon={faLock}/></InputGroup.Text>
+                                        </InputGroup.Prepend>
+                                        <FormControl required autoComplete="off" type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)}
+                                            className={"bg-dark text-white"} placeholder="Enter Password"/>
+                                    </InputGroup>
+                                </Form.Group>
+                            </Form.Row>
+                        </Card.Body>
+                        <Card.Footer style={{"text-align":"right"}}>
+                            <Button size="sm" type="button" variant="success" 
+                               >
+                                <FontAwesomeIcon icon={faSignInAlt}/> Login
+                            </Button>{' '}
+                        </Card.Footer>
+                    </Card>
+                </Col>
+            </Row>
 	);
 }
 
