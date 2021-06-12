@@ -2,7 +2,7 @@ import React from "react";
 
 import { Jumbotron, Row, Col } from "react-bootstrap";
 
-export default function Welcome(props) {
+export default function Home(props) {
   return (
     <Row>
       <Col lg={12} className={"margin-top"}>
