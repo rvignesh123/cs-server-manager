@@ -11,6 +11,7 @@ export const SidebarData = [
     icon: <AiIcons.AiFillHome />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
+    isPrivate: false,
   },
   {
     title: "Manager Portal",
@@ -18,6 +19,7 @@ export const SidebarData = [
     icon: <IoIcons.IoIosPaper />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
+    isPrivate: true,
 
     subNav: [
       {
@@ -38,10 +40,12 @@ export const SidebarData = [
     title: "Downloads",
     path: "/downloads",
     icon: <IoIcons.IoMdPeople />,
+    isPrivate: false,
   },
   {
     title: "About",
     path: "/about",
     icon: <IoIcons.IoMdHelpCircle />,
+    isPrivate: false,
   },
 ];

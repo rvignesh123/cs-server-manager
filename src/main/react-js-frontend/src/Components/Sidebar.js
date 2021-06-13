@@ -7,8 +7,13 @@ import { SidebarData } from "./SidebarData";
 import SubMenu from "./SubMenu";
 import { IconContext } from "react-icons/lib";
 import { Navbar } from "react-bootstrap";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faUserPlus, faSignInAlt, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUserPlus,
+  faSignInAlt,
+  faSignOutAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { useAuthState } from "../Context";
 
 const Nav = styled.div`
   background: #343a40;
@@ -45,6 +50,7 @@ const SidebarWrap = styled.div`
 `;
 
 const Sidebar = () => {
+  const userDetails = useAuthState();
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -64,7 +70,12 @@ const Sidebar = () => {
                 <AiIcons.AiOutlineClose onClick={showSidebar} />
               </NavIcon>
               {SidebarData.map((item, index) => {
-                return <SubMenu item={item} key={index} />;
+                console.log(userDetails);
+                console.log(item);
+                if (item.isPrivate && !Boolean(userDetails.token)) {
+                } else {
+                  return <SubMenu item={item} key={index} />;
+                }
               })}
             </SidebarWrap>
           </SidebarNav>
@@ -79,7 +90,9 @@ const Sidebar = () => {
           CS Server
         </Link>
         <Nav className="navbar-right">
-          <Link to={"login"} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Login</Link>
+          <Link to={"login"} className="nav-link">
+            <FontAwesomeIcon icon={faSignInAlt} /> Login
+          </Link>
         </Nav>
       </Navbar>
     </>

@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Container } from "react-bootstrap";
@@ -16,7 +16,6 @@ function App() {
   const quote = "Good friends, good game, Have fun.";
   const footer = "Vignesh Rv";
 
-
   return (
     <AuthProvider>
       <Router>
@@ -28,7 +27,6 @@ function App() {
             </Route>
             <Route path="/login" exact component={Login} />
             <GameContextProvider>
-
               <Route path="/manager" exact component={Console} />
               <Route path="/manager/console" exact component={Console} />
               <Route path="/manager/maps" exact component={Maps} />
