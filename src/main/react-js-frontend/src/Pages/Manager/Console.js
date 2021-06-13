@@ -22,43 +22,53 @@ import { GameContext } from "../../Context/GameContextProvider";
 export default function Console(props) {
   const fitAddon = new FitAddon();
   const xtermRef = React.useRef(null);
-  const [ command, setCommand] = useState('');
-  const { status, setStatus , log , getServerStatus, runCommand } = useContext(GameContext);
+  const [command, setCommand] = useState("");
+  const [lineCount, setLineCount] = useState(0);
+  const { status, setStatus, log, getServerStatus, runCommand, totalCount } =
+    useContext(GameContext);
 
+  React.useEffect(() => {
+    console.log("ON React effect" + totalCount);
+    setLineCount(totalCount);
+  }, [totalCount]);
 
   React.useEffect(() => {
     xtermRef.current.terminal.reset();
-    xtermRef.current.terminal.writeln(log);
     fitAddon.fit();
+  }, []);
+
+  React.useEffect(() => {
+    xtermRef.current.terminal.writeln(log);
   }, [log]);
 
   useEffect(() => {
-    getServerStatus();
+    getServerStatus(lineCount);
     const interval = setInterval(() => {
       console.log("Triggered Timer" + status);
-      if(status){
-        console.log("Calling server method")
-        getServerStatus();
+      if (status) {
+        console.log("Calling server method");
+        console.log(lineCount);
+        getServerStatus(lineCount);
       }
-    }, 5*1000);
-  
+    }, 5 * 1000);
+
     return () => clearInterval(interval);
   }, [status]);
 
-  const updateServer=(checked)=>{
+  const updateServer = (checked) => {
     setStatus(checked);
     axios
-    .get("http://localhost:8080/server/updateServer?status="+checked)
-    .then((response) => response.data)
-    .then((data) => {
-      setStatus(data);
-    })
-    .catch((error) => {
-      console.log(error);
-      setStatus(false);
-    });
-  }
-  
+      .get("http://localhost:8080/server/updateServer?status=" + checked)
+      .then((response) => response.data)
+      .then((data) => {
+        setStatus(data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setStatus(false);
+      });
+  };
+
   return (
     <Row>
       <Col lg={12} className={"margin-top"}>
@@ -77,7 +87,9 @@ export default function Console(props) {
                 checked={status}
                 onstyle="success"
                 offstyle="outline-danger"
-                onChange={(checked) => {updateServer(checked)}}
+                onChange={(checked) => {
+                  updateServer(checked);
+                }}
               />
             </Row>
 
@@ -89,9 +101,15 @@ export default function Console(props) {
                 aria-label="Execute a command"
                 aria-describedby="basic-addon2"
                 value={command}
-								onChange={(e) => setCommand(e.target.value)}
+                onChange={(e) => setCommand(e.target.value)}
               />
-              <Button variant="outline-secondary" id="button-addon2" onClick={()=>{runCommand(command)}}>
+              <Button
+                variant="outline-secondary"
+                id="button-addon2"
+                onClick={() => {
+                  runCommand(command);
+                }}
+              >
                 Run
               </Button>
             </InputGroup>

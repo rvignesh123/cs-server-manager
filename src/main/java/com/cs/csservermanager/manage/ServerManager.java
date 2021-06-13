@@ -51,8 +51,14 @@ public class ServerManager {
 
   @PostMapping("/serverStatus")
   @ResponseBody
-  public ServerProcess serverStatus() {
-    return gameProcess;
+  public Map<String, Object> serverStatus(@RequestBody Map<String, String> data) throws IOException {
+    long lineCount = Long.parseLong(data.get("lineCount"));
+    System.out.println(lineCount);
+    Map<String, Object> status = new HashMap<>();
+    status.put("isRunning", gameProcess.isRunning);
+    status.put("output", gameProcess.getOutput(lineCount));
+    status.put("lineCount", gameProcess.lineCount);
+    return status;
   }
 
   @PostMapping("/writeCommand")
