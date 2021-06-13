@@ -4,11 +4,12 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,7 +27,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.cs.csservermanager.properties.ApplicationProps;
 
-@Controller
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RestController
 public class ServerResourceList {
 
   public static final String SERVER_RESOURCE_LIST = "ServerResourceList";
