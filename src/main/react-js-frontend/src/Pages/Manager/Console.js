@@ -23,14 +23,8 @@ export default function Console(props) {
   const fitAddon = new FitAddon();
   const xtermRef = React.useRef(null);
   const [command, setCommand] = useState("");
-  const [lineCount, setLineCount] = useState(0);
   const { status, setStatus, log, getServerStatus, runCommand, totalCount } =
     useContext(GameContext);
-
-  React.useEffect(() => {
-    console.log("ON React effect" + totalCount);
-    setLineCount(totalCount);
-  }, [totalCount]);
 
   React.useEffect(() => {
     xtermRef.current.terminal.reset();
@@ -42,13 +36,12 @@ export default function Console(props) {
   }, [log]);
 
   useEffect(() => {
-    getServerStatus(lineCount);
+    getServerStatus();
     const interval = setInterval(() => {
       console.log("Triggered Timer" + status);
       if (status) {
         console.log("Calling server method");
-        console.log(lineCount);
-        getServerStatus(lineCount);
+        getServerStatus();
       }
     }, 5 * 1000);
 

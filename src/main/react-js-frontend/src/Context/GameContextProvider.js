@@ -6,19 +6,22 @@ const GameContextProvider = (props) => {
   const [log, setLog] = useState("");
   const [totalCount, setTotalCount] = useState(0);
 
-  const getServerStatus = (count) => {
+  const getServerStatus = () => {
     console.log("Status Server Call");
     axios
       .post("http://localhost:8080/server/serverStatus", {
-        lineCount: count,
+        lineCount: totalCount,
       })
       .then((response) => response.data)
       .then((data) => {
         console.log(data);
-        const { isRunning, output, lineCount } = data;
+        const { isRunning, output } = data;
         setLog(output);
         setStatus(isRunning);
-        setTotalCount(lineCount);
+
+        setTotalCount(data.lineCount);
+
+        console.log("set values " + status + "  " + totalCount);
       })
       .catch((error) => {
         console.log(error);

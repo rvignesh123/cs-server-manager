@@ -22,7 +22,6 @@ import org.apache.commons.io.FileUtils;
 public class ServerProcess implements Runnable {
 
   public List<String> commands;
-  public String output = "";
   public boolean isRunning = false;
   public long lineCount = 0;
 
@@ -77,27 +76,19 @@ public class ServerProcess implements Runnable {
     isRunning = true;
     BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()));
     String line = "";
-    StringBuilder builder = new StringBuilder();
     while (true) {
       line = r.readLine();
       if (line == null) {
         break;
       }
-      builder.append(line + "\n\r");
-      appendLog(line + "\n\r");
+      appendLog(line + "\n");
       lineCount++;
-      output = builder.toString();
       if (toLog) {
         System.out.println(line);
       }
     }
     process.waitFor();
     return process.exitValue();
-  }
-
-  @Override
-  public String toString() {
-    return output;
   }
 
   public void writeCommand(String lineCommand) throws IOException {
@@ -127,7 +118,6 @@ public class ServerProcess implements Runnable {
   public void stopProcess() {
     if (processHandle != null) {
       processHandle.destroy();
-      output = "";
     }
   }
 
