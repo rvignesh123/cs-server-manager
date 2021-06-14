@@ -17,10 +17,13 @@
   font-size: 3rem;
 }
 
+.page-margin-top {
+  margin-top: 116px;
+}
+
 .margin-top {
   margin-top: 20px;
 }
-
 .card-style {
   padding: 10px;
 }

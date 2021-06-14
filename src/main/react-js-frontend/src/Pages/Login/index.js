@@ -51,7 +51,7 @@ function Login(props) {
   };
 
   return (
-    <Row className="justify-content-md-center margin-top">
+    <Row className="justify-content-md-center">
       <Col xs={5}>
         {error && <Alert variant="danger">{error}</Alert>}
         <Card className={"border border-dark bg-dark text-white"}>

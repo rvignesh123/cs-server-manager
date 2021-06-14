@@ -19,6 +19,7 @@ import { faTerminal } from "@fortawesome/free-solid-svg-icons";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { GameContext } from "../../Context/GameContextProvider";
+import { ROOT_URL } from "../../Context/actions";
 
 export default function Console(props) {
   const fitAddon = new FitAddon();
@@ -54,7 +55,7 @@ export default function Console(props) {
   const updateServer = (checked) => {
     setButtonStatus(checked);
     axios
-      .get("http://localhost:8080/server/updateServer?status=" + checked)
+      .get(ROOT_URL + "/server/updateServer?status=" + checked)
       .then((response) => response.data)
       .then((data) => {
         setStatus(data);
@@ -68,7 +69,7 @@ export default function Console(props) {
 
   return (
     <Row>
-      <Col lg={12} className={"margin-top"}>
+      <Col lg={12}>
         <Card>
           <Card.Body>
             <Row>

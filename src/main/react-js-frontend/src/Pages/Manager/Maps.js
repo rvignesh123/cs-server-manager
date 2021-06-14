@@ -2,16 +2,16 @@ import React, { useContext, useState, useEffect } from "react";
 import { GameContext } from "../../Context/GameContextProvider";
 import { Jumbotron, Row, Col, Image, Card, Button } from "react-bootstrap";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { ROOT_URL } from "../../Context/actions";
 import axios from "axios";
 const Maps = () => {
   const { status, runCommand } = useContext(GameContext);
-  const [cardSelected, setCardSelected] = useState(false);
   const [maps, setMaps] = useState([]);
   const [activeCard, setActiveCard] = useState();
 
   const fetchMaps = async (e) => {
     axios
-      .post("http://localhost:8080/maps/fetchMaps")
+      .post(ROOT_URL + "/maps/fetchMaps")
       .then((response) => response.data)
       .then((data) => {
         setMaps(data);
@@ -50,10 +50,7 @@ const Maps = () => {
             style={{ width: "18rem" }}
             onClick={(e) => setCardActive(index)}
           >
-            <Card.Img
-              variant="top"
-              src={"http://localhost:8080/" + map.preview}
-            />
+            <Card.Img variant="top" src={ROOT_URL + "/" + map.preview} />
             <Card.Body className="bg-dark">
               <Card.Title>{map.name}</Card.Title>
               {activeCard == index ? (
@@ -71,7 +68,7 @@ const Maps = () => {
   };
 
   return (
-    <Jumbotron className="bg-dark text-white margin-top">
+    <Jumbotron className="bg-dark text-white">
       {status ? (
         <>
           <h1>Maps Loader</h1>{" "}

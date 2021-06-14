@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
+import { ROOT_URL } from "./actions";
 export const GameContext = createContext();
 const GameContextProvider = (props) => {
   const [status, setStatus] = useState(false);
@@ -9,7 +10,7 @@ const GameContextProvider = (props) => {
   const getServerStatus = () => {
     console.log("Status Server Call");
     axios
-      .post("http://localhost:8080/server/serverStatus", {
+      .post(ROOT_URL + "/server/serverStatus", {
         lineCount: totalCount,
       })
       .then((response) => response.data)
@@ -30,7 +31,7 @@ const GameContextProvider = (props) => {
 
   const runCommand = (command) => {
     axios
-      .post("http://localhost:8080/server/writeCommand", { command: command })
+      .post(ROOT_URL + "/server/writeCommand", { command: command })
       .then((response) => response.data)
       .then((data) => {})
       .catch((error) => {

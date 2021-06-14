@@ -19,7 +19,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Sidebar />
-        <Container fluid>
+        <Container fluid className={"page-margin-top"}>
           <Switch>
             <Route exact path="/">
               <Home heading={heading} quote={quote} footer={footer} />
