@@ -4,11 +4,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { AuthProvider } from "./Context";
 import Sidebar from "./Components/Sidebar";
-import Console from "./Pages/Manager/Console";
 import GameContextProvider from "./Context/GameContextProvider";
+import routes from "./Config/routes.js";
+import AppRoute from "./Components/AppRoute";
 import Home from "./Pages/Home";
-import Maps from "./Pages/Manager/Maps";
-import Login from "./Pages/Login";
 import "./App.css";
 
 function App() {
@@ -25,11 +24,15 @@ function App() {
             <Route exact path="/">
               <Home heading={heading} quote={quote} footer={footer} />
             </Route>
-            <Route path="/login" exact component={Login} />
             <GameContextProvider>
-              <Route path="/manager" exact component={Console} />
-              <Route path="/manager/console" exact component={Console} />
-              <Route path="/manager/maps" exact component={Maps} />
+              {routes.map((route) => (
+                <AppRoute
+                  key={route.path}
+                  path={route.path}
+                  component={route.component}
+                  isPrivate={route.isPrivate}
+                />
+              ))}
             </GameContextProvider>
           </Switch>
         </Container>

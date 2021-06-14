@@ -24,6 +24,7 @@ public class ServerProcess implements Runnable {
   public List<String> commands;
   public boolean isRunning = false;
   public long lineCount = 0;
+  public long processId = 0;
 
   private Process process = null;
   private ProcessHandle processHandle = null;
@@ -72,6 +73,7 @@ public class ServerProcess implements Runnable {
     }
     processBuilder.redirectErrorStream(true);
     process = processBuilder.start();
+    processId = process.pid();
     processHandle = process.toHandle();
     isRunning = true;
     BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -115,9 +117,9 @@ public class ServerProcess implements Runnable {
     }
   }
 
-  public void stopProcess() {
+  public void stopProcess() throws IOException {
     if (processHandle != null) {
-      processHandle.destroy();
+      Runtime.getRuntime().exec("pkill hlds");
     }
   }
 

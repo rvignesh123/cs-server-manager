@@ -23,10 +23,12 @@ export default function Console(props) {
   const fitAddon = new FitAddon();
   const xtermRef = React.useRef(null);
   const [command, setCommand] = useState("");
+  const [buttonStatus, setButtonStatus] = useState(false);
   const { status, setStatus, log, getServerStatus, runCommand, totalCount } =
     useContext(GameContext);
 
   React.useEffect(() => {
+    getServerStatus();
     xtermRef.current.terminal.reset();
     fitAddon.fit();
   }, []);
@@ -36,7 +38,7 @@ export default function Console(props) {
   }, [log]);
 
   useEffect(() => {
-    getServerStatus();
+    setButtonStatus(status);
     const interval = setInterval(() => {
       console.log("Triggered Timer" + status);
       if (status) {
@@ -49,12 +51,13 @@ export default function Console(props) {
   }, [status]);
 
   const updateServer = (checked) => {
-    setStatus(checked);
+    setButtonStatus(checked);
     axios
       .get("http://localhost:8080/server/updateServer?status=" + checked)
       .then((response) => response.data)
       .then((data) => {
         setStatus(data);
+        setButtonStatus(data);
       })
       .catch((error) => {
         console.log(error);
@@ -77,7 +80,7 @@ export default function Console(props) {
                 </div>
               </Col>
               <BootstrapSwitchButton
-                checked={status}
+                checked={buttonStatus}
                 onstyle="success"
                 offstyle="outline-danger"
                 onChange={(checked) => {
