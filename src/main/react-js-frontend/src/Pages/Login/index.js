@@ -34,7 +34,6 @@ function Login(props) {
 
     try {
       let response = await loginUser(dispatch, { username, password });
-      console.log(response);
       if (!response.username) return;
       axios.interceptors.request.use(
         (config) => {
@@ -45,7 +44,7 @@ function Login(props) {
           return Promise.reject(error);
         }
       );
-      props.history.push("/dashboard");
+      props.history.push("/");
     } catch (error) {
       console.log(error);
     }

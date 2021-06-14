@@ -4,62 +4,49 @@ export const GameContext = createContext();
 const GameContextProvider = (props) => {
   const [status, setStatus] = useState(false);
   const [log, setLog] = useState("");
+  const [totalCount, setTotalCount] = useState(0);
 
-
-
-/*useEffect(()=>{
-  getServerStatus();
-},[]);*/
-
-
-
-  /*var serverInfo = setInterval(() => {
-    getServerStatus();
-  }, 18000); */
-
-  /*setTimeout(()=>{
-    clearInterval(serverInfo);
-  },18000);*/
-
-
-  const getServerStatus=()=>{
-    console.log("Status Server Call")
+  const getServerStatus = () => {
+    console.log("Status Server Call");
     axios
-    .post("http://localhost:8080/server/serverStatus")
-    .then((response) => response.data)
-    .then((data) => {
-      console.log(data);
-      const {isRunning, output} = data;
-      setLog(output);
-      setStatus(isRunning);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+      .post("http://localhost:8080/server/serverStatus", {
+        lineCount: totalCount,
+      })
+      .then((response) => response.data)
+      .then((data) => {
+        console.log(data);
+        const { isRunning, output } = data;
+        setLog(output);
+        setStatus(isRunning);
 
-  const runCommand=(command)=>{
-    axios
-    .post("http://localhost:8080/server/writeCommand",{"command":command})
-    .then((response) => response.data)
-    .then((data) => {
-      
-    })
-    .catch((error) => {
-      console.log(error);
-      
-    });
+        setTotalCount(data.lineCount);
+
+        console.log("set values " + status + "  " + totalCount);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
+  const runCommand = (command) => {
+    axios
+      .post("http://localhost:8080/server/writeCommand", { command: command })
+      .then((response) => response.data)
+      .then((data) => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <GameContext.Provider
       value={{
         status: status,
-        setStatus : setStatus,
-        log : log,
-        getServerStatus : getServerStatus,
-        runCommand: runCommand
+        setStatus: setStatus,
+        log: log,
+        getServerStatus: getServerStatus,
+        runCommand: runCommand,
+        totalCount: totalCount,
       }}
     >
       {props.children}

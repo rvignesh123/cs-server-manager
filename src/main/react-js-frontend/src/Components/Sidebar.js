@@ -13,7 +13,7 @@ import {
   faSignInAlt,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { useAuthState } from "../Context";
+import { useAuthDispatch, logout, useAuthState } from "../Context";
 
 const Nav = styled.div`
   background: #343a40;
@@ -50,10 +50,31 @@ const SidebarWrap = styled.div`
 `;
 
 const Sidebar = () => {
+  const dispatch = useAuthDispatch();
   const userDetails = useAuthState();
   const [sidebar, setSidebar] = useState(false);
 
+  const handleLogout = () => {
+    logout(dispatch);
+  };
+
   const showSidebar = () => setSidebar(!sidebar);
+
+  const useLogin = (token) => {
+    if (Boolean(token)) {
+      return (
+        <Link className="nav-link" onClick={handleLogout}>
+          <FontAwesomeIcon icon={faSignInAlt} /> Logout
+        </Link>
+      );
+    } else {
+      return (
+        <Link to={"login"} className="nav-link">
+          <FontAwesomeIcon icon={faSignInAlt} /> Login
+        </Link>
+      );
+    }
+  };
 
   return (
     <>
@@ -70,8 +91,6 @@ const Sidebar = () => {
                 <AiIcons.AiOutlineClose onClick={showSidebar} />
               </NavIcon>
               {SidebarData.map((item, index) => {
-                console.log(userDetails);
-                console.log(item);
                 if (item.isPrivate && !Boolean(userDetails.token)) {
                 } else {
                   return <SubMenu item={item} key={index} />;
@@ -89,10 +108,8 @@ const Sidebar = () => {
           />{" "}
           CS Server
         </Link>
-        <Nav className="navbar-right">
-          <Link to={"login"} className="nav-link">
-            <FontAwesomeIcon icon={faSignInAlt} /> Login
-          </Link>
+        <Nav className="navbar-right ml-auto">
+          {useLogin(userDetails.token)}
         </Nav>
       </Navbar>
     </>

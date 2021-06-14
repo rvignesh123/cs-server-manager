@@ -33,26 +33,44 @@ public class ServerManager {
   @PostMapping("/startServer")
   @ResponseBody
   public Boolean startServer() {
-    HashMap<String, String> resultMap = new HashMap<>();
     Thread gameThread = new Thread(gameProcess);
     gameThread.start();
-    resultMap.put("result", "success");
-    return true;
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return gameProcess.isRunning;
   }
 
   @PostMapping("/stopServer")
   @ResponseBody
   public Boolean stopServer() {
-    HashMap<String, String> resultMap = new HashMap<>();
-    gameProcess.stopProcess();
-    resultMap.put("result", "success");
-    return false;
+    try {
+      gameProcess.stopProcess();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return gameProcess.isRunning;
   }
 
   @PostMapping("/serverStatus")
   @ResponseBody
-  public ServerProcess serverStatus() {
-    return gameProcess;
+  public Map<String, Object> serverStatus(@RequestBody Map<String, String> data) throws IOException {
+    long lineCount = Long.parseLong(data.get("lineCount"));
+    System.out.println(lineCount);
+    Map<String, Object> status = new HashMap<>();
+    status.put("isRunning", gameProcess.isRunning);
+    status.put("output", gameProcess.getOutput(lineCount));
+    status.put("lineCount", gameProcess.lineCount);
+    return status;
   }
 
   @PostMapping("/writeCommand")

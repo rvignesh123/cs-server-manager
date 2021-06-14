@@ -1,7 +1,9 @@
 import React from "react";
-import Login from "../Pages/Login";
-import Home from "../Pages/Home";
 import NotFound from "../Pages/NotFound";
+import Home from "../Pages/Home";
+import Maps from "../Pages/Manager/Maps";
+import Console from "../Pages/Manager/Console";
+import Login from "../Pages/Login";
 
 const routes = [
   {
@@ -10,13 +12,18 @@ const routes = [
     isPrivate: false,
   },
   {
-    path: "/dashboard",
-    component: Home,
-    isPrivate: false,
+    path: "/manager",
+    component: Console,
+    isPrivate: true,
   },
   {
-    path: "/*",
-    component: NotFound,
+    path: "/console",
+    component: Console,
+    isPrivate: true,
+  },
+  {
+    path: "/maps",
+    component: Maps,
     isPrivate: true,
   },
 ];

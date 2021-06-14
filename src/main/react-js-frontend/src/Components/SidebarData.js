@@ -24,13 +24,13 @@ export const SidebarData = [
     subNav: [
       {
         title: "Live Console",
-        path: "/manager/console",
+        path: "/console",
         icon: <IoIcons.IoIosPaper />,
         cName: "sub-nav",
       },
       {
         title: "Maps",
-        path: "/manager/maps",
+        path: "/maps",
         icon: <IoIcons.IoIosPaper />,
         cName: "sub-nav",
       },
