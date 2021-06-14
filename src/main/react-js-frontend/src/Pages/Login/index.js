@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { loginUser, useAuthState, useAuthDispatch } from "../../Context";
+import Toast from "react-bootstrap/Toast";
 import styles from "./login.module.css";
 import {
   Row,
@@ -24,10 +25,8 @@ import axios from "axios";
 function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(undefined);
-
+  const [show, setShow] = useState(false);
   const dispatch = useAuthDispatch();
-  const { loading, errorMessage } = useAuthState();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -46,6 +45,7 @@ function Login(props) {
       );
       props.history.push("/");
     } catch (error) {
+      setShow(true);
       console.log(error);
     }
   };
@@ -53,7 +53,19 @@ function Login(props) {
   return (
     <Row className="justify-content-md-center">
       <Col xs={5}>
-        {error && <Alert variant="danger">{error}</Alert>}
+        <Toast
+          onClose={() => setShow(false)}
+          show={show}
+          delay={3000}
+          autohide
+          className="bg-danger"
+        >
+          <Toast.Header>
+            <strong className="mr-auto">
+              Bad credentials unable to log in
+            </strong>
+          </Toast.Header>
+        </Toast>
         <Card className={"border border-dark bg-dark text-white"}>
           <Card.Header>
             <FontAwesomeIcon icon={faSignInAlt} /> Login

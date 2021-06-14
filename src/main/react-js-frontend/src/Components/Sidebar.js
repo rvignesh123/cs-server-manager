@@ -8,6 +8,7 @@ import SubMenu from "./SubMenu";
 import { IconContext } from "react-icons/lib";
 import { Navbar } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ROOT_URL } from "../Context/actions";
 import {
   faUserPlus,
   faSignInAlt,
@@ -104,9 +105,9 @@ const Sidebar = () => {
             </SidebarWrap>
           </SidebarNav>
         </IconContext.Provider>
-        <Link to={""} className="navbar-brand">
+        <Link to={""} className="navbar-brand logo-style">
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Book_icon_1.png"
+            src={ROOT_URL + "/img/logo.png"}
             width="25"
             height="25"
             alt="brand"

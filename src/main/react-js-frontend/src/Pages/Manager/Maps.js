@@ -50,7 +50,13 @@ const Maps = () => {
             style={{ width: "18rem" }}
             onClick={(e) => setCardActive(index)}
           >
-            <Card.Img variant="top" src={ROOT_URL + "/" + map.preview} />
+            <LazyLoadImage
+              alt={ROOT_URL + "/ServerResourceList/MapPreview/default.svg"}
+              src={ROOT_URL + "/" + map.preview} // use normal <img> attributes as props
+              width={280}
+              height={160}
+            />
+
             <Card.Body className="bg-dark">
               <Card.Title>{map.name}</Card.Title>
               {activeCard == index ? (

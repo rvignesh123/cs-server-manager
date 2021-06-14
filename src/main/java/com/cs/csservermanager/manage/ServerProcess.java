@@ -34,12 +34,12 @@ public class ServerProcess implements Runnable {
     logFile = new File(ApplicationProps.getAppDir() + File.separator + "gameLog.txt");
     String[] commandArray = ApplicationProps.APPLICATION_PROP.getProperty("gameCommand").split(" ");
     commands = Arrays.asList(commandArray);
-    initFile();
   }
 
   private void initFile() {
     try {
       FileUtils.writeStringToFile(logFile, "", "UTF-8");
+      lineCount = 0;
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -75,6 +75,7 @@ public class ServerProcess implements Runnable {
     process = processBuilder.start();
     processId = process.pid();
     processHandle = process.toHandle();
+    initFile();
     isRunning = true;
     BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()));
     String line = "";
@@ -120,6 +121,7 @@ public class ServerProcess implements Runnable {
   public void stopProcess() throws IOException {
     if (processHandle != null) {
       Runtime.getRuntime().exec("pkill hlds");
+      initFile();
     }
   }
 
