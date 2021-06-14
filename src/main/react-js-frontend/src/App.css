@@ -24,3 +24,13 @@
 .card-style {
   padding: 10px;
 }
+
+.switch.btn {
+  min-width: 4.7rem !important;
+  margin-right: 1rem;
+}
+
+.custom-sidebar-menu a:hover {
+  text-decoration: none;
+  color: aliceblue;
+}

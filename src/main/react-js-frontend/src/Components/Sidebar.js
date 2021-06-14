@@ -78,7 +78,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" className="custom-sidebar-menu">
         <IconContext.Provider value={{ color: "#fff" }}>
           <Nav>
             <NavIcon to="#">

@@ -10,6 +10,7 @@ import {
   ButtonGroup,
   InputGroup,
   FormControl,
+  Accordion,
 } from "react-bootstrap";
 import { XTerm } from "xterm-for-react";
 import { FitAddon } from "xterm-addon-fit";
@@ -90,7 +91,7 @@ export default function Console(props) {
             </Row>
 
             <XTerm ref={xtermRef} addons={[fitAddon]} className="margin-top" />
-            <InputGroup className="mb-3">
+            <InputGroup className="mb-3 margin-top">
               <FormControl
                 required
                 placeholder="Execute a command"
@@ -104,6 +105,7 @@ export default function Console(props) {
                 id="button-addon2"
                 onClick={() => {
                   runCommand(command);
+                  setCommand("");
                 }}
               >
                 Run
@@ -112,6 +114,7 @@ export default function Console(props) {
           </Card.Body>
         </Card>
       </Col>
+      <Row></Row>
     </Row>
   );
 }

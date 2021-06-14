@@ -1,9 +1,26 @@
+import axios from "axios";
 let user = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")).username
   : "";
 let token = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")).accessToken
   : "";
+
+let tokenType = localStorage.getItem("currentUser")
+  ? JSON.parse(localStorage.getItem("currentUser")).tokenType
+  : "";
+
+if (token) {
+  axios.interceptors.request.use(
+    (config) => {
+      config.headers.authorization = `${tokenType} ${token}`;
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+}
 
 export const initialState = {
   user: "" || user,
