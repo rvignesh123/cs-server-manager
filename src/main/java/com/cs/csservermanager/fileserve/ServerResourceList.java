@@ -43,6 +43,8 @@ public class ServerResourceList {
     File target = new File(getFetchPath(request.getRequestURI()));
     if (target.isFile() && target.exists()) {
       return sendDownloadResponse(target);
+    } else if (!target.exists()) {
+      return ResponseEntity.notFound();
     }
     return "fileList";
   }

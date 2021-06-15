@@ -53,7 +53,6 @@ const Maps = () => {
             onClick={(e) => setCardActive(index)}
           >
             <LazyLoadImage
-              alt={ROOT_URL + "/ServerResourceList/MapPreview/default.svg"}
               src={ROOT_URL + "/" + map.preview} // use normal <img> attributes as props
               width={280}
               height={160}

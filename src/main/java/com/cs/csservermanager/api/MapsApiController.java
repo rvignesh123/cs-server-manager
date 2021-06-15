@@ -64,7 +64,12 @@ public class MapsApiController {
     for (File eachMap : actualMapList) {
       MapData mapData = new MapData();
       mapData.setName(eachMap.getName().substring(0, eachMap.getName().indexOf('.')));
-      mapData.setPreview("ServerResourceList/MapPreview/" + mapData.getName() + getPreviewFileExt(mapData.getName()));
+      String previewExt = getPreviewFileExt(mapData.getName());
+      if (previewExt != null) {
+        mapData.setPreview("ServerResourceList/MapPreview/" + mapData.getName() + previewExt);
+      } else {
+        mapData.setPreview("ServerResourceList/MapPreview/default.png");
+      }
       mapList.add(mapData);
     }
     writeMapsListToFile(mapsFile, mapList);
@@ -85,7 +90,7 @@ public class MapsApiController {
         return eachExt;
       }
     }
-    return ".jpg";
+    return null;
   }
 
   /**

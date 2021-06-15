@@ -18,9 +18,12 @@ import java.util.stream.Stream;
 import com.cs.csservermanager.properties.ApplicationProps;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ServerProcess implements Runnable {
 
+  private static Logger log = LoggerFactory.getLogger(ServerProcess.class);
   public List<String> commands;
   public boolean isRunning = false;
   public long lineCount = 0;
@@ -120,8 +123,16 @@ public class ServerProcess implements Runnable {
 
   public void stopProcess() throws IOException {
     if (processHandle != null) {
-      Runtime.getRuntime().exec("pkill hlds");
+      log.info("Stopping game process");
+      try {
+        Runtime.getRuntime().exec("pkill hlds");
+      } catch (Exception e) {
+        log.error("Process failed", e);
+      }
+      log.info("Clearing file");
       initFile();
+      processHandle.destroy();
+      log.info("Destroyed handle");
     }
   }
 
