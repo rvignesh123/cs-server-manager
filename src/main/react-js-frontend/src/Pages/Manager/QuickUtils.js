@@ -104,27 +104,30 @@ const QuickUtils = () => {
                 selected={singleSelections}
               />
             </Col>
-            <Row>
-              <Button
-                variant="secondary"
-                onClick={activateMap}
-                disabled={loading}
-              >
-                {loading && (
-                  <Spinner
-                    as="span"
-                    animation="border"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                  />
-                )}
-                <span className="visually-hidden"> Set Map</span>
-              </Button>
-              <Col className="mt-auto mb-auto">
-                {showMapSuccess && <CheckMarkSuccess />}
-              </Col>
-            </Row>
+            <Col>
+              <Row>
+                <Button
+                  variant="secondary"
+                  onClick={activateMap}
+                  disabled={loading}
+                  className="quick-util-button"
+                >
+                  {loading && (
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                  )}
+                  <span className="visually-hidden"> Set Map</span>
+                </Button>
+                <Col className="mt-auto mb-auto">
+                  {showMapSuccess && <CheckMarkSuccess />}
+                </Col>
+              </Row>
+            </Col>
           </Form.Group>
 
           <Form.Group as={Row} controlId="formPlaintextPassword">
