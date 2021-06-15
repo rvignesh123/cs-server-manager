@@ -2,16 +2,18 @@ import React, { useContext, useState, useEffect } from "react";
 import { GameContext } from "../../Context/GameContextProvider";
 import { Jumbotron, Row, Col, Image, Card, Button } from "react-bootstrap";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { ROOT_URL } from "../../Context/actions";
 import axios from "axios";
+import CheckMarkSuccess from "../../Components/CheckMarkSuccess";
 const Maps = () => {
   const { status, runCommand } = useContext(GameContext);
-  const [cardSelected, setCardSelected] = useState(false);
   const [maps, setMaps] = useState([]);
   const [activeCard, setActiveCard] = useState();
+  const [showMapSuccess, setShowMapSuccess] = useState(false);
 
   const fetchMaps = async (e) => {
     axios
-      .post("http://localhost:8080/maps/fetchMaps")
+      .post(ROOT_URL + "/maps/fetchMaps")
       .then((response) => response.data)
       .then((data) => {
         setMaps(data);
@@ -29,20 +31,20 @@ const Maps = () => {
     return <h1>Please turn on the server to see the maps</h1>;
   };
 
-  React.useEffect(() => {
-    console.log(status);
-  }, [status]);
-
   const setCardActive = (cardNumber) => {
+    setShowMapSuccess(false);
     setActiveCard(cardNumber);
   };
 
   const activateMap = (map) => {
-    runCommand("changelevel " + map.name);
+    runCommand("changelevel " + map.name)
+      .then(() => {
+        setShowMapSuccess(true);
+      })
+      .catch(() => {});
   };
 
   const mapImages = (map, index) => {
-    console.log(map);
     return (
       <>
         <Col className="card-style" key={index}>
@@ -50,16 +52,25 @@ const Maps = () => {
             style={{ width: "18rem" }}
             onClick={(e) => setCardActive(index)}
           >
-            <Card.Img
-              variant="top"
-              src={"http://localhost:8080/" + map.preview}
+            <LazyLoadImage
+              src={ROOT_URL + "/" + map.preview} // use normal <img> attributes as props
+              width={280}
+              height={160}
             />
+
             <Card.Body className="bg-dark">
               <Card.Title>{map.name}</Card.Title>
               {activeCard == index ? (
-                <Button variant="primary" onClick={(e) => activateMap(map)}>
-                  Play now
-                </Button>
+                <>
+                  <Row className="map-card-button">
+                    <Button variant="primary" onClick={(e) => activateMap(map)}>
+                      Play now
+                    </Button>
+                    <Col className="mt-auto mb-auto">
+                      {showMapSuccess && <CheckMarkSuccess />}
+                    </Col>
+                  </Row>
+                </>
               ) : (
                 ""
               )}
@@ -71,7 +82,7 @@ const Maps = () => {
   };
 
   return (
-    <Jumbotron className="bg-dark text-white margin-top">
+    <Jumbotron className="bg-dark text-white">
       {status ? (
         <>
           <h1>Maps Loader</h1>{" "}

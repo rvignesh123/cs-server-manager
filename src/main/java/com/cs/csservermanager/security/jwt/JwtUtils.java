@@ -15,7 +15,7 @@ public class JwtUtils {
 
   private String jwtSecret = "asdfafsdwerwre1!@!@!323231122L80980";
 
-  private int jwtExpirationMs = 1000 * 60 * 15;
+  private int jwtExpirationMs = 1000 * 60 * 360;
 
   public String generateJwtToken(String userName) {
     return Jwts.builder().setSubject(userName).setIssuedAt(new Date())

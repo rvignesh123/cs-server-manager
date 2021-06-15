@@ -65,7 +65,6 @@ public class ServerManager {
   @ResponseBody
   public Map<String, Object> serverStatus(@RequestBody Map<String, String> data) throws IOException {
     long lineCount = Long.parseLong(data.get("lineCount"));
-    System.out.println(lineCount);
     Map<String, Object> status = new HashMap<>();
     status.put("isRunning", gameProcess.isRunning);
     status.put("output", gameProcess.getOutput(lineCount));

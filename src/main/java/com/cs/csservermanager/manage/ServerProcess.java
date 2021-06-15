@@ -18,9 +18,12 @@ import java.util.stream.Stream;
 import com.cs.csservermanager.properties.ApplicationProps;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ServerProcess implements Runnable {
 
+  private static Logger log = LoggerFactory.getLogger(ServerProcess.class);
   public List<String> commands;
   public boolean isRunning = false;
   public long lineCount = 0;
@@ -34,12 +37,12 @@ public class ServerProcess implements Runnable {
     logFile = new File(ApplicationProps.getAppDir() + File.separator + "gameLog.txt");
     String[] commandArray = ApplicationProps.APPLICATION_PROP.getProperty("gameCommand").split(" ");
     commands = Arrays.asList(commandArray);
-    initFile();
   }
 
   private void initFile() {
     try {
       FileUtils.writeStringToFile(logFile, "", "UTF-8");
+      lineCount = 0;
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -75,6 +78,7 @@ public class ServerProcess implements Runnable {
     process = processBuilder.start();
     processId = process.pid();
     processHandle = process.toHandle();
+    initFile();
     isRunning = true;
     BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()));
     String line = "";
@@ -119,7 +123,16 @@ public class ServerProcess implements Runnable {
 
   public void stopProcess() throws IOException {
     if (processHandle != null) {
-      Runtime.getRuntime().exec("pkill hlds");
+      log.info("Stopping game process");
+      try {
+        Runtime.getRuntime().exec("pkill hlds");
+      } catch (Exception e) {
+        log.error("Process failed", e);
+      }
+      log.info("Clearing file");
+      initFile();
+      processHandle.destroy();
+      log.info("Destroyed handle");
     }
   }
 

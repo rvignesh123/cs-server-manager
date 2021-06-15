@@ -1,4 +1,5 @@
-const ROOT_URL = "http://localhost:8080";
+import axios from "axios";
+export const ROOT_URL = "http://localhost:8080";
 
 export async function loginUser(dispatch, loginPayload) {
   const requestOptions = {
@@ -31,4 +32,14 @@ export async function logout(dispatch) {
   dispatch({ type: "LOGOUT" });
   localStorage.removeItem("currentUser");
   localStorage.removeItem("token");
+
+  axios.interceptors.request.use(
+    (config) => {
+      config.headers.authorization = "";
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
 }

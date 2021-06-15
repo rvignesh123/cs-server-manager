@@ -17,10 +17,39 @@
   font-size: 3rem;
 }
 
+.page-margin-top {
+  margin-top: 116px;
+}
+
 .margin-top {
   margin-top: 20px;
 }
-
 .card-style {
   padding: 10px;
+}
+
+.switch.btn {
+  min-width: 4.7rem !important;
+  margin-right: 1rem;
+}
+
+.custom-sidebar-menu a:hover {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.logo-style {
+  margin-left: 20px;
+}
+
+.login-box {
+  min-width: 300px;
+}
+
+.map-card-button {
+  padding-left: 12px;
+}
+
+.quick-util-button {
+  margin-left: 15px;
 }
