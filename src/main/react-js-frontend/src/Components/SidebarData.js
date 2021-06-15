@@ -34,6 +34,12 @@ export const SidebarData = [
         icon: <IoIcons.IoIosPaper />,
         cName: "sub-nav",
       },
+      {
+        title: "Quick Utils",
+        path: "/quick-utils",
+        icon: <IoIcons.IoIosPaper />,
+        cName: "sub-nav",
+      },
     ],
   },
   {

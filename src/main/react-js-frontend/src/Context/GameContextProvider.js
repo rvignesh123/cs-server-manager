@@ -24,13 +24,9 @@ const GameContextProvider = (props) => {
   };
 
   const runCommand = (command) => {
-    axios
+    return axios
       .post(ROOT_URL + "/server/writeCommand", { command: command })
-      .then((response) => response.data)
-      .then((data) => {})
-      .catch((error) => {
-        console.log(error);
-      });
+      .then((response) => response.data);
   };
 
   return (

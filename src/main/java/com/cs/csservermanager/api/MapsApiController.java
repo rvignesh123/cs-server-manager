@@ -36,6 +36,17 @@ public class MapsApiController {
     return readMapsList();
   }
 
+  @PostMapping(value = "/mapList", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<String> getMapList() throws IOException {
+    log.info("MapsApiController : getMapList");
+    List<MapData> mapDataList = readMapsList();
+    List<String> mapList = new ArrayList<>();
+    for (MapData mapData : mapDataList) {
+      mapList.add(mapData.getName());
+    }
+    return mapList;
+  }
+
   private List<MapData> readMapsList() throws IOException {
     File mapsFile = new File(ApplicationProps.getMapsFile());
     if (mapsFile.exists()) {

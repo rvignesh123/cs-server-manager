@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { loginUser, useAuthState, useAuthDispatch } from "../../Context";
 import Toast from "react-bootstrap/Toast";
-import styles from "./login.module.css";
+import "./login.module.css";
 import {
   Row,
   Col,
@@ -51,8 +51,8 @@ function Login(props) {
   };
 
   return (
-    <Row className="justify-content-md-center">
-      <Col xs={5}>
+    <Row>
+      <Col className="ml-auto mr-auto login-box" xs={5}>
         <Toast
           onClose={() => setShow(false)}
           show={show}

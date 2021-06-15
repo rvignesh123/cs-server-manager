@@ -4,10 +4,12 @@ import { Jumbotron, Row, Col, Image, Card, Button } from "react-bootstrap";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { ROOT_URL } from "../../Context/actions";
 import axios from "axios";
+import CheckMarkSuccess from "../../Components/CheckMarkSuccess";
 const Maps = () => {
   const { status, runCommand } = useContext(GameContext);
   const [maps, setMaps] = useState([]);
   const [activeCard, setActiveCard] = useState();
+  const [showMapSuccess, setShowMapSuccess] = useState(false);
 
   const fetchMaps = async (e) => {
     axios
@@ -29,20 +31,20 @@ const Maps = () => {
     return <h1>Please turn on the server to see the maps</h1>;
   };
 
-  React.useEffect(() => {
-    console.log(status);
-  }, [status]);
-
   const setCardActive = (cardNumber) => {
+    setShowMapSuccess(false);
     setActiveCard(cardNumber);
   };
 
   const activateMap = (map) => {
-    runCommand("changelevel " + map.name);
+    runCommand("changelevel " + map.name)
+      .then(() => {
+        setShowMapSuccess(true);
+      })
+      .catch(() => {});
   };
 
   const mapImages = (map, index) => {
-    console.log(map);
     return (
       <>
         <Col className="card-style" key={index}>
@@ -60,9 +62,16 @@ const Maps = () => {
             <Card.Body className="bg-dark">
               <Card.Title>{map.name}</Card.Title>
               {activeCard == index ? (
-                <Button variant="primary" onClick={(e) => activateMap(map)}>
-                  Play now
-                </Button>
+                <>
+                  <Row className="map-card-button">
+                    <Button variant="primary" onClick={(e) => activateMap(map)}>
+                      Play now
+                    </Button>
+                    <Col className="mt-auto mb-auto">
+                      {showMapSuccess && <CheckMarkSuccess />}
+                    </Col>
+                  </Row>
+                </>
               ) : (
                 ""
               )}

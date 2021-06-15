@@ -41,3 +41,15 @@
 .logo-style {
   margin-left: 20px;
 }
+
+.login-box {
+  min-width: 300px;
+}
+
+.map-card-button {
+  padding-left: 12px;
+}
+
+.quick-util-button {
+  margin-left: 15px;
+}
