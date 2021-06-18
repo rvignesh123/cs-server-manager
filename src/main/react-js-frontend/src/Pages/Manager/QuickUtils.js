@@ -181,6 +181,7 @@ const QuickUtils = () => {
       setSpecList(specList);
     }
     setLoading(false);
+    setPlayerIndex(-1);
   };
   const moveTeam = (player, type, index, originalType) => {
     setLoading(true);
