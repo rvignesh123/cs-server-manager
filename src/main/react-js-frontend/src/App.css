@@ -53,3 +53,24 @@
 .quick-util-button {
   margin-left: 15px;
 }
+
+.player-control {
+  text-decoration: underline;
+}
+
+.list-button {
+  float: right;
+}
+
+.list-button .btn {
+  margin: 2px;
+}
+
+.player-list-item {
+  float: left;
+}
+
+.active-player {
+  margin-top: 4px;
+  font-weight: bold;
+}

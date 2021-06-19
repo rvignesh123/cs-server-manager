@@ -49,7 +49,7 @@ const Maps = () => {
       <>
         <Col className="card-style" key={index}>
           <Card
-            style={{ width: "18rem" }}
+            style={{ width: "282px" }}
             onClick={(e) => setCardActive(index)}
           >
             <LazyLoadImage

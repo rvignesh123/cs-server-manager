@@ -1,5 +1,5 @@
 import axios from "axios";
-export const ROOT_URL = "http://localhost:8080";
+export const ROOT_URL = "http://192.168.1.13:8080";
 
 export async function loginUser(dispatch, loginPayload) {
   const requestOptions = {
