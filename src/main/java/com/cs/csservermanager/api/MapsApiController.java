@@ -9,7 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.cs.csservermanager.dto.MapData;
+import com.cs.csservermanager.dto.UploadFileResponse;
 import com.cs.csservermanager.properties.ApplicationProps;
+import com.cs.csservermanager.service.FileStorageService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -17,11 +19,15 @@ import org.apache.commons.io.FileUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/maps")
@@ -29,6 +35,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class MapsApiController {
 
   private static Logger log = LoggerFactory.getLogger(MapsApiController.class);
+
+  @Autowired
+  private FileStorageService fileStorageService;
 
   @PostMapping(value = "/fetchMaps", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<MapData> fetchMaps() throws IOException {
@@ -118,4 +127,15 @@ public class MapsApiController {
     File file = new File(fileName);
     return FileUtils.readFileToString(file, "UTF-8");
   }
+
+  @PostMapping("/uploadMap")
+  public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
+    String fileName = fileStorageService.storeFile(file);
+
+    String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/").path(fileName)
+        .toUriString();
+
+    return new UploadFileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+  }
+
 }
