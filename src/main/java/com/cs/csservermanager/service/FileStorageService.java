@@ -6,6 +6,8 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -33,7 +35,7 @@ public class FileStorageService {
     }
   }
 
-  public String storeFile(MultipartFile file) {
+  public File storeFile(MultipartFile file) {
     // Normalize file name
     String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
@@ -47,7 +49,7 @@ public class FileStorageService {
       Path targetLocation = this.fileStorageLocation.resolve(fileName);
       Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-      return fileName;
+      return targetLocation.toFile();
     } catch (IOException ex) {
       throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
     }
