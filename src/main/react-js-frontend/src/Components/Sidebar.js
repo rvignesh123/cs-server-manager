@@ -99,7 +99,9 @@ const Sidebar = () => {
               {SidebarData.map((item, index) => {
                 if (item.isPrivate && !Boolean(userDetails.token)) {
                 } else {
-                  return <SubMenu item={item} key={index} />;
+                  return (
+                    <SubMenu item={item} key={index} onAction={showSidebar} />
+                  );
                 }
               })}
             </SidebarWrap>
@@ -107,12 +109,12 @@ const Sidebar = () => {
         </IconContext.Provider>
         <Link to={""} className="navbar-brand logo-style">
           <img
-            src={ROOT_URL + "/img/logo.png"}
+            src={ROOT_URL + "/ServerResourceList/images/logo.png"}
             width="25"
             height="25"
             alt="brand"
           />{" "}
-          CS Server
+          Destructive Devils
         </Link>
         <Nav className="navbar-right ml-auto">
           {useLogin(userDetails.token)}
