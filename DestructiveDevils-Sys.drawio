@@ -1,9 +1,117 @@
-<mxfile host="app.diagrams.net" modified="2024-05-15T17:04:24.011Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" version="24.4.0" etag="AcMQ27mR02mgiaR8oiHQ" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-15T17:25:42.946Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="LmrteEWp1CbF3PX_OdGG" version="24.4.0" type="github">
   <diagram name="Page-1" id="jKxCIC3CsjsDpZkFH55f">
-    <mxGraphModel>
+    <mxGraphModel dx="1050" dy="530" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="TxiwLBzHp5xz686yuzs5-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-1" target="TxiwLBzHp5xz686yuzs5-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-1" target="TxiwLBzHp5xz686yuzs5-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-1" value="EC2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="110" y="80" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-3" target="TxiwLBzHp5xz686yuzs5-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-3" value="SSH" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-7" value="Admin" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="135" y="340" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-13" target="TxiwLBzHp5xz686yuzs5-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-13" value="File System 8GB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="280" y="80" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-14" value="Has Game files and Server files." style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;" vertex="1" parent="1">
+          <mxGeometry x="250" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-17" target="TxiwLBzHp5xz686yuzs5-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-17" value="CS Server&lt;br&gt;Powered by Spring Java" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="90" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-19" value="CS 1.6&lt;br&gt;Game server" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="670" y="160" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-21" value="Launch" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="560" y="90" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-22" target="TxiwLBzHp5xz686yuzs5-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-22" value="Players" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="710" y="290" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-24" value="Basic Flow of control" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="340" y="230" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-25" target="TxiwLBzHp5xz686yuzs5-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-25" value="EC2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="110" y="540" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-26" target="TxiwLBzHp5xz686yuzs5-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-26" value="Public IPv4&lt;br&gt;eg. 117.29.30.5" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="550" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-28" target="TxiwLBzHp5xz686yuzs5-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-28" value="Duck DNS" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="540" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-30" value="destructive-devils.duckdns.org" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="550" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-32" value="Domain Name flow" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="390" y="480" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-40" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-34" target="TxiwLBzHp5xz686yuzs5-39">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-49" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-34" target="TxiwLBzHp5xz686yuzs5-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-34" value="CS Server" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="85" y="700" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-38" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-35" target="TxiwLBzHp5xz686yuzs5-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-35" value="Process Handler" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="710" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-37" value="Game Executable file" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="710" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-42" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-39" target="TxiwLBzHp5xz686yuzs5-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-39" value="React Front end&lt;br&gt;client" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="65" y="870" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-43" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-41" target="TxiwLBzHp5xz686yuzs5-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-41" value="Rest API" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="870" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-50" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="TxiwLBzHp5xz686yuzs5-48" target="TxiwLBzHp5xz686yuzs5-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TxiwLBzHp5xz686yuzs5-48" value="File DB&lt;br&gt;Auth" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="210" y="700" width="60" height="80" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
